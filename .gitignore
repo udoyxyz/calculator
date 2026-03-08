@@ -1,0 +1,6 @@
+node_modules/
+dist/
+out/
+android/.gradle/
+android/build/
+*.log
