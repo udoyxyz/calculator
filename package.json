@@ -1,0 +1,52 @@
+{
+  "name": "glow-calculator",
+  "version": "1.0.0",
+  "description": "Installable Glow Calculator for Windows and Android.",
+  "main": "electron/main.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "check:js": "node --check script.js && node --check electron/main.js && node --check electron/preload.js",
+    "dist:win": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable",
+    "cap:sync": "cap sync android",
+    "cap:open": "cap open android",
+    "install:android": "npm install --ignore-scripts",
+    "build:android:debug": "npx cap add android && npm run cap:sync && cd android && ./gradlew assembleDebug"
+  },
+  "build": {
+    "appId": "com.glowcalculator.app",
+    "productName": "Glow Calculator",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "index.html",
+      "styles.css",
+      "script.js",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "artifactName": "Glow-Calculator-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  }
+}

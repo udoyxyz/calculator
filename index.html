@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glow Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="calculator" aria-label="Calculator with date and time">
+        <header class="display-panel">
+          <p class="datetime" id="datetime" aria-live="polite"></p>
+          <p class="expression" id="expression" aria-live="polite">0</p>
+          <p class="result" id="result" aria-live="polite">0</p>
+        </header>
+
+        <div class="keys" role="group" aria-label="Calculator buttons">
+          <button data-action="clear" class="key key--ghost">AC</button>
+          <button data-action="delete" class="key key--ghost">⌫</button>
+          <button data-value="%" class="key key--ghost">%</button>
+          <button data-value="/" class="key key--operator">÷</button>
+
+          <button data-value="7" class="key">7</button>
+          <button data-value="8" class="key">8</button>
+          <button data-value="9" class="key">9</button>
+          <button data-value="*" class="key key--operator">×</button>
+
+          <button data-value="4" class="key">4</button>
+          <button data-value="5" class="key">5</button>
+          <button data-value="6" class="key">6</button>
+          <button data-value="-" class="key key--operator">−</button>
+
+          <button data-value="1" class="key">1</button>
+          <button data-value="2" class="key">2</button>
+          <button data-value="3" class="key">3</button>
+          <button data-value="+" class="key key--operator">+</button>
+
+          <button data-action="sign" class="key">±</button>
+          <button data-value="0" class="key key--wide">0</button>
+          <button data-value="." class="key">.</button>
+          <button data-action="equals" class="key key--equals">=</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
