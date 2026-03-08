@@ -1,51 +1,46 @@
 # Glow Calculator (Web + Windows + Android)
 
-A polished calculator with live date/time, now packaged so it can be distributed as:
-- a **Windows installer** (`.exe`)
-- an **Android app** (`.apk`)
+A polished calculator with live date/time, packaged for:
+- **Windows installer** (`.exe`)
+- **Android app** (`.apk`)
 
-## What this repo includes
-- `index.html`, `styles.css`, `script.js`: core calculator UI/logic.
-- `electron/`: desktop shell to run the calculator as a native app on Windows.
-- `capacitor.config.ts`: Android wrapper config.
-- `.github/workflows/build-artifacts.yml`: CI pipeline that builds downloadable Windows and Android artifacts.
+## Why there is no `.exe` / `.apk` committed in the repo
+Installers/APKs are build artifacts and should not be committed to git.
+This repo builds them automatically with GitHub Actions and uploads them for download.
 
-## Use it on Windows
-### Option A (recommended for end users)
-1. Go to your GitHub repository **Actions** tab.
-2. Run the **Build desktop and Android artifacts** workflow (or push to `main`).
-3. Download the `windows-installer` artifact.
-4. Run the generated installer `.exe` and install Glow Calculator.
+## Fastest way for anyone to download install files
+### 1) Build from GitHub Actions
+1. Push this repo to GitHub.
+2. Open **Actions** → **Build desktop and Android artifacts**.
+3. Click **Run workflow**.
+4. After it finishes, download artifacts:
+   - `windows-installer` → contains `.exe`
+   - `android-apk` → contains `app-debug.apk`
 
-### Option B (build locally)
+### 2) Optional: auto-attach files to a GitHub Release
+If you publish a GitHub Release, the workflow also attaches:
+- built `.exe`
+- built `app-debug.apk`
+
+## Local Windows build (for maintainers)
 ```bash
 npm install
 npm run dist:win
 ```
-Installer output is created in `dist/`.
+Output: `dist/*.exe`
 
-## Use it on Android
-### Option A (recommended for end users)
-1. Go to your GitHub repository **Actions** tab.
-2. Download the `android-apk` artifact from a successful workflow run.
-3. Transfer `app-debug.apk` to your phone.
-4. Install it (enable "Install unknown apps" if prompted).
-
-### Option B (build locally)
+## Local Android build (for maintainers)
 ```bash
-npm install
+npm install --ignore-scripts
 npx cap add android
 npm run cap:sync
 cd android
 ./gradlew assembleDebug
 ```
-APK path:
-`android/app/build/outputs/apk/debug/app-debug.apk`
+Output: `android/app/build/outputs/apk/debug/app-debug.apk`
 
-## Run as a normal web app
-Open `index.html` directly, or run:
-
+## Run as plain web app
 ```bash
 python3 -m http.server 4173
 ```
-Then browse to `http://localhost:4173`.
+Open `http://localhost:4173`.

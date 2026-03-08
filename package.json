@@ -11,7 +11,9 @@
     "dist:win": "electron-builder --win nsis",
     "dist:portable": "electron-builder --win portable",
     "cap:sync": "cap sync android",
-    "cap:open": "cap open android"
+    "cap:open": "cap open android",
+    "install:android": "npm install --ignore-scripts",
+    "build:android:debug": "npx cap add android && npm run cap:sync && cd android && ./gradlew assembleDebug"
   },
   "build": {
     "appId": "com.glowcalculator.app",

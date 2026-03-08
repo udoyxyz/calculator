@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: ["main", "work"]
+  release:
+    types: [published]
 
 jobs:
   windows-installer:
@@ -23,6 +25,11 @@ jobs:
         with:
           name: windows-installer
           path: dist/*.exe
+      - name: Attach installer to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.exe
 
   android-apk:
     runs-on: ubuntu-latest
@@ -36,8 +43,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (skip Electron binary download)
+        run: npm ci --ignore-scripts
       - name: Generate Android project
         run: |
           npx cap add android
@@ -51,3 +58,8 @@ jobs:
         with:
           name: android-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Attach APK to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: android/app/build/outputs/apk/debug/app-debug.apk
